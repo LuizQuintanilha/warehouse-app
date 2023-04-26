@@ -1,4 +1,4 @@
-<h1>Galpão <%= @warehouse.cod %></h1>
+<h1>Galpão <%= @warehouse.code %></h1>
 <div>
   <strong>Nome: </strong><%= @warehouse.name %>
 </div>
@@ -15,7 +15,12 @@
   <strong>CEP:</strong> <%= @warehouse.cep %>
 </div>
 <div>
-  <strong>Descrição:</strong> <%= @warehouse.descripition %>
+  <strong>Descrição:</strong> <%= @warehouse.description %>
 </div>
+</div>
+  <%= link_to('Editar', edit_warehouse_path)  %>
+  <%= link_to('Excluir', warehouse_path(@warehouse.id), method: :delete)  %>
+</div>
+
 
 <%= link_to('Voltar', root_path)  %>

@@ -1,21 +1,32 @@
-<h1>Galpões & Estoques</h1>
+<section id="warehouses">
+  <h2>Galpões</h2>
+  <div>
+    <%= I18n.translate("hello")  %>
+  </div>
+  <div>
+    <%= I18n.localize(Date.today)  %>
+  </div>
 
-<h2>Galpões</h2>
-<% @warehouses.each do |w| %>
+ 
   <div>
-    Nome: <%= link_to(w.name, warehouse_path(w.id)) %>
+    <%= link_to 'Cadastrar Galpão', new_warehouse_path %>
   </div>
-  <div>
-   Código: <%= w.cod %>
-  </div>
-  <div>
-    Cidade: <%= w.city  %>
-  </div>
-  <div>
-    Área: <%= w.area %> m²
-  </div>
-<% end %>
 
-<% if  @warehouses.empty? %>
-  <p>Não existem galpões cadastrados</p>
-<% end %>
+  <% @warehouses.each do |w| %>
+    <div>
+      <h3><%= link_to(w.name, warehouse_path(w.id)) %></h3>
+      <dl>
+        <dt>Código:</dt>
+        <dd> <%= w.code %></dd>
+        <dt>Cidade: </dt>
+        <dd><%= w.city  %></dd>
+        <dt>Área: </dt>
+        <dd><%= w.area %> m²</dd>
+      </dl>
+    </div>
+  <% end %>
+
+  <% if  @warehouses.empty? %>
+    <p>Não existem galpões cadastrados</p>
+  <% end %>
+</section>
