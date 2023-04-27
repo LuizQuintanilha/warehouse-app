@@ -12,20 +12,45 @@ RSpec.describe Warehouse, type: :model do
         #assert
         expect(result).to eq false
       end
-
       it 'false when code is empty' do
         #arrange
         warehouse = Warehouse.new(name:'Rio', code: '', address: 'Endereço', city: 'Rio de Janeiro', 
                                   area: 40000, cep: '25000-000', description: 'descrição')
        
-     
         expect(warehouse).not_to be_valid
       end
       it 'false when address is empty' do
         #arrange
         warehouse = Warehouse.new(name:'Rio', code: 'RIO', address: '', city: 'Rio de Janeiro', 
                                   area: 40000, cep: '25000-000', description: 'descrição')
-      
+        #assert
+        expect(warehouse.valid?).to eq false
+      end
+      it 'false when city is empty' do
+        #arrange
+        warehouse = Warehouse.new(name:'Rio', code: 'RIO', address: 'Endereço', city: '', 
+                                  area: 40000, cep: '25000-000', description: 'descrição')
+        #assert
+        expect(warehouse.valid?).to eq false
+      end
+      it 'false when area is empty' do
+        #arrange
+        warehouse = Warehouse.new(name:'Rio', code: 'RIO', address: 'Endereço', city: 'Rio de Janeiro', 
+                                  area: '', cep: '25000-000', description: 'descrição')
+        #assert
+        expect(warehouse.valid?).to eq false
+      end
+      it 'false when cep is empty' do
+        #arrange
+        warehouse = Warehouse.new(name:'Rio', code: 'RIO', address: 'Endereço', city: 'Rio de Janeiro', 
+                                  area: 40000, cep: '', description: 'descrição')
+        #assert
+        expect(warehouse.valid?).to eq false
+      end
+      it 'false when cep is empty' do
+        #arrange
+        warehouse = Warehouse.new(name:'Rio', code: 'RIO', address: 'Endereço', city: 'Rio de Janeiro', 
+                                  area: 40000, cep: '25000-000', description: '')
         #assert
         expect(warehouse.valid?).to eq false
       end

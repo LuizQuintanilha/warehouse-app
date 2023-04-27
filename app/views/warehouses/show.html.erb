@@ -19,8 +19,7 @@
 </div>
 </div>
   <%= link_to('Editar', edit_warehouse_path)  %>
-  <%= link_to('Excluir', warehouse_path(@warehouse.id), method: :delete)  %>
+  <%= button_to('Excluir', warehouse_path(@warehouse.id), method: :delete)  %>
 </div>
-
 
 <%= link_to('Voltar', root_path)  %>

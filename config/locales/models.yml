@@ -4,7 +4,6 @@ pt-BR:
       warehouse: 'Galpão'
     attributes:
       warehouse:
-        login: "Handle"
         name: "Nome"
         code: "Código"
         description: "Descrição"  
@@ -12,3 +11,15 @@ pt-BR:
         area: "Área"
         address: "Endereço"
         cep: "CEP"
+      supplier:
+        corporate_name: 'Razão Social'
+        brand_name: 'Marca'
+        registration_number: 'Número de registro'
+        full_address: 'Endereço'
+        zip: 'CEP'
+        city: 'Cidade'
+        state: 'Estado'
+        email: 'Email'
+
+
+

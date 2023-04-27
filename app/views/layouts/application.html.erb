@@ -13,10 +13,16 @@
     <header>
       <h1>Galpões & Estoques</h1>
     </header>
+
+    <nav>
+      <%= link_to 'Fornecedores', suppliers_path %>
+      <%= link_to 'Modelos de Produtos', products_models_path %>
+    </nav>
+
     <main>
-    <div>
-      <%= notice %>
-    </div>
+      <div>
+        <%= notice %>
+      </div>
       <%= yield %>
     </main>
   </body>

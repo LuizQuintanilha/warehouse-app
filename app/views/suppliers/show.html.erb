@@ -1,0 +1,24 @@
+<h2>Fornecedor: <%= @supplier.brand_name  %></h2>
+<h3><%= @supplier.corporate_name %></h3>
+
+<dl>
+  <dt>Número de registro:</dt> 
+  <dd><%= @supplier.registration_number  %></dd>
+  <dt>Endereço:</dt>  
+  <dd><%= @supplier.full_address  %></dd>
+  <dt>CEP:</dt> 
+  <dd><%= @supplier.zip  %></dd>
+  <dt>Cidade:</dt> 
+  <dd><%= @supplier.city  %></dd>
+  <dt>Estado:</dt> 
+  <dd><%= @supplier.state  %></dd>
+  <dt>E-mail:</dt> 
+  <dd><%= @supplier.email  %></dd>
+
+</dl>
+<div>
+  <%= link_to 'Editar', edit_supplier_path %>
+</div>
+<div>
+  <%= link_to 'Voltar', root_path %>
+</div>
