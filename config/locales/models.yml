@@ -11,8 +11,6 @@ pt-BR:
         area: "Área"
         address: "Endereço"
         cep: "CEP"
-        cod: "Código"
-        descripition: "Descrição"
       supplier:
         corporate_name: 'Razão Social'
         brand_name: 'Marca'
