@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   #get '/', to: 'home#index'
   resources :warehouses, only: [:show, :new, :create, :edit, :update, :destroy]
   resources :suppliers, only: [:index, :show, :new, :create, :edit, :update, :destroy]
-  resources :products_models, only: [:index, :show]
+  resources :product_models, only: [:index, :show, :new, :create, :edit, :update]
 end

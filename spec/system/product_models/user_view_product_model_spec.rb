@@ -8,8 +8,9 @@ describe 'Usuário vê modelos de produtos' do
       click_on 'Modelos de Produtos'
     end
 
-    expect(current_path).to eq(products_models_path)
+    expect(current_path).to eq(product_models_path)
   end
+  
   it 'com sucesso' do 
     x = Supplier.create!(brand_name: 'Samsung', corporate_name: 'Samsung Tech LTDA', registration_number: '20002305007', 
                                 full_address: 'Avenida Paulista, 10000', zip: '20220-000', city: 'São Paulo',
@@ -33,16 +34,11 @@ describe 'Usuário vê modelos de produtos' do
     expect(page).to have_content('Samsung')
   end
 
-
   it 'e não existem produtos cadastrados' do
-
     visit root_path
     within('nav') do 
       click_on 'Modelos de Produtos'
     end
-
     expect(page).to have_content('Nenhum modelo de produto cadastrado.')
-    
-
   end
 end

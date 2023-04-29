@@ -1,3 +1,9 @@
 <h2>Editar dados do fornecedor</h2>
 
+<% if(@supplier.errors.any?)%>
+  <% @supplier.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li> 
+  <% end %>
+<% end %>
+
 <%= render 'form' %>

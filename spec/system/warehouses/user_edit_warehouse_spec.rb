@@ -33,7 +33,7 @@ describe 'Usuário edita um  galpão' do
     fill_in 'CEP', with: '15550-000'
     fill_in 'Endereço', with: 'Avenidade Paulista, 1000'
     
-    click_on 'Atualizar'
+    click_on 'Enviar'
 
     #expect(current_path).to eq(warehouse_path)
     expect(page).to have_content('Galpão atualizado com sucesso')
@@ -52,7 +52,7 @@ describe 'Usuário edita um  galpão' do
     fill_in 'Nome', with: ''
     fill_in 'CEP', with: ''
     fill_in 'Endereço', with: ''
-    click_on 'Atualizar'
+    click_on 'Enviar'
 
     expect(page).to have_content('Não foi possível atualizar galpão.')
   end
