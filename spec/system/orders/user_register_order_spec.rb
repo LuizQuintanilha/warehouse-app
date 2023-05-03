@@ -22,7 +22,8 @@ describe 'usuário cadastra um pedido' do
                                 city: 'Rio de Janeiro', state: 'RJ', email:'acheacme@email.com')
     Supplier.create!(corporate_name: 'AMMC LTDA', brand_name: 'LOTUS',registration_number: '2000230513',
                      full_address: 'Avenida das Mangas, 1000', zip: '23500-000', 
-                     city: 'Rio de Janeiro', state: 'RJ', email:'lotusammc@email.com')                            
+                     city: 'Rio de Janeiro', state: 'RJ', email:'lotusammc@email.com')      
+    allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('ABC12345')                      
     # Act
     login_as(user)
     visit root_path
@@ -33,6 +34,7 @@ describe 'usuário cadastra um pedido' do
     click_on 'Gravar'
     # Assert
     expect(page).to have_content 'Pedido registrado com sucesso.'
+    expect(page).to have_content 'ABC12345'
     expect(page).to have_content 'Galpão Destino: GRU | Aeroporto SP'
     expect(page).to have_content 'Fornecedor: ACHE LTDA'
     expect(page).to have_content 'Usuário Responsável: Luiz - luiz@email.com'
