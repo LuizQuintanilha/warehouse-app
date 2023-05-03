@@ -12,11 +12,11 @@ class OrdersController < ApplicationController
     if @order.save!
       flash[:notice] = 'Pedido registrado com sucesso.'
       redirect_to @order
-    #else
-      #@warehouses = Warehouse.all
-      #@suppliers = Supplier.all
-      #flash.now[:notice] = 'Não foi possível salvar o pedido.'
-      #render 'new'
+    else
+      @warehouses = Warehouse.all
+      @suppliers = Supplier.all
+      flash.now[:notice] = 'Não foi possível salvar o pedido.'
+      render 'new'
     end
   end
 

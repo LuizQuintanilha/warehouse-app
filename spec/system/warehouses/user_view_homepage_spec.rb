@@ -5,9 +5,10 @@ describe 'Usuário visita tela inicial' do
   it 'e vê o nome da app' do
     # Arrange
     # Act
-    visit(root_path) #tela inicial ou root_path
+    visit root_path #tela inicial ou root_path
     # Assert
     expect(page).to have_content('Galpões & Estoques')
+    expect(page).to have_link('Galpões & Estoques', href: root_path)
   end
 
   it 'e vê o os galpões cadastrados' do 
@@ -20,7 +21,7 @@ describe 'Usuário visita tela inicial' do
                     address: 'Av. Alagoas, 1000', cep: '22350-000',
                     description: 'Galpão do do Estado de Maceio')
     # Act
-    visit(root_path)
+    visit root_path
     # Assert
     expect(page).not_to have_content('Não existem galpões cadastrados')
     expect(page).to  have_content('Rio')
@@ -38,7 +39,7 @@ describe 'Usuário visita tela inicial' do
     #Arrange
 
     #Atc
-    visit(root_path)
+    visit root_path
 
     #Assert
     expect(page).to have_content('Não existem galpões cadastrados')
