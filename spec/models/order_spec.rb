@@ -16,6 +16,34 @@ RSpec.describe Order, type: :model do
 
       expect(result).to be true
     end
+    it 'data prevista de entrega deve ser obrigatória' do
+      # Arrange
+      pedido = Order.new(estimated_delivery_date: '')
+      # Act
+      pedido.valid?
+      result = pedido.errors.include?(:estimated_delivery_date)
+      # Assert
+      expect(result).to eq true
+    end
+    it 'data prevista de entrega não pode ser inferior à data atual' do
+
+      pedido = Order.new(estimated_delivery_date: 1.day.ago)
+
+      pedido.valid?
+      result = pedido.errors.include?(:estimated_delivery_date)
+
+      expect(result).to be true
+      expect(pedido.errors[:estimated_delivery_date]).to include("A data não pode ser inferior a data atual")
+    end
+    it 'data prevista de entrega deve ser maior que data atual' do
+
+      pedido = Order.new(estimated_delivery_date: 1.day.from_now)
+
+      pedido.valid?
+      result = pedido.errors.include?(:estimated_delivery_date)
+
+      expect(result).to be false
+    end
   end
   describe 'Gera um código aleatório' do
     it 'ao criar um novo pedido' do

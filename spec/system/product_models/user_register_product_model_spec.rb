@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-
 describe 'Usuário cadastra novo modelo de produto' do 
   it 'com sucesso' do 
     user = User.create!(name:'Luiz', email:'luiz@email.com', password:'123456')
@@ -11,12 +10,10 @@ describe 'Usuário cadastra novo modelo de produto' do
                                       full_address: 'Avenida Paulista, 10000', zip: '20220-000', city: 'São Paulo',
                                       state: 'SP', email: 'lg.tech@email.com')
 
-                                      
-    login_as(user)                                  
+    login_as(user)
     visit root_path
     click_on 'Modelos de Produtos'
     click_on 'Cadastrar Novo Produto'
-    
     fill_in 'Nome', with: 'Monitor Acer 22 polegadas'
     fill_in 'Peso', with: 3_000
     fill_in 'Altura', with: 40

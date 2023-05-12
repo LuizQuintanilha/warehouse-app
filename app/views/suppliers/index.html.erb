@@ -1,5 +1,5 @@
 <h2>Fornecedores cadastrados</h1>
-
+<strong><%= link_to 'Cadastrar Fornecedor', new_supplier_path %></strong>
 <% if @suppliers.any? %>
   <table>
     <thead>
@@ -23,4 +23,3 @@
   <p>Não existem fornecedores cadastrados.</p>
 <% end %>
 
-<strong><%= link_to 'Cadastrar Fornecedor', new_supplier_path %></strong>

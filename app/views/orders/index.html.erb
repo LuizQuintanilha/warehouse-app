@@ -1,0 +1,9 @@
+<h2>Meus Pedidos:</h2>
+<div>
+<% @orders.each do |order| %>
+  <div>
+  <strong>1 pedido encontrado</strong>
+  </div>
+ <%= render order %>
+<% end %>
+</div>

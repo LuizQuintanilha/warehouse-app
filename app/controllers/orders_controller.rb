@@ -1,5 +1,10 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+
+  def index
+    @orders = current_user.orders
+  end
+
   def new
     @order = Order.new
     @warehouses = Warehouse.all
@@ -22,6 +27,15 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    if @order.user != current_user
+      redirect_to root_path, notice: 'Você não tem acesso ao este pedido.'
+    end
+  end
+
+  def search
+    @code = params["query"]
+
+    @orders = Order.where("code LIKE ?", "%#{@code}%")
   end
 
   private

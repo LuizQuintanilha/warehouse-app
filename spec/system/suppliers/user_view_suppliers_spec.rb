@@ -12,10 +12,10 @@ describe 'Usuário vê todos os fornecedores' do
   end
 
   it 'com sucesso' do 
-    supplier = Supplier.create!(corporate_name: 'ACHE LTDA', brand_name: 'ACME',registration_number: '2000230501',
+    Supplier.create!(corporate_name: 'ACHE LTDA', brand_name: 'ACME',registration_number: '2000230501',
                                 full_address: 'Avenida dos Coqueiros, 1000', zip: '23550-000', 
                                 city: 'Rio de Janeiro', state: 'RJ', email:'acheacme@email.com')
-    supplier = Supplier.create!(corporate_name: 'AQI LTDA', brand_name: 'AKI',registration_number: '2000230502',
+    Supplier.create!(corporate_name: 'AQI LTDA', brand_name: 'AKI',registration_number: '2000230502',
                                 full_address: 'Avenida das Jaqueiras, 2000', zip: '20550-000', 
                                 city: 'São Paulo', state: 'SP', email:'aki@email.com')     
     visit root_path

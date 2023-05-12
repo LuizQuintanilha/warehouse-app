@@ -42,5 +42,6 @@ describe 'usuário cadastra um pedido' do
     expect(page).not_to have_content 'AMMC LTDA'
     expect(page).to have_content 'Data Prevista: 20/05/2023'  
   end
+  
 end
 
