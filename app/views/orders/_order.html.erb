@@ -1,11 +1,14 @@
+  <div>
+    <strong><%= Order.human_attribute_name(:code)  %>: </strong>
+    <%= link_to order.code, order %>
+  </div>
 
-  <strong>Código <%= link_to order.code, order %></strong>
+  <div>
+  <strong><%= Order.human_attribute_name(:warehouse_id)  %>: </strong> 
+    <%= order.warehouse.full_description %>
   </div>
   <div>
-  <strong><%= Order.human_attribute_name(:warehouse_id)  %>:
-    </strong> <%= order.warehouse.full_description %>
-  </div>
-  <div>
-  <strong><%= Order.human_attribute_name(:supplier_id)  %>:
-    </strong> <%= order.supplier.corporate_name %>
+
+  <strong><%= Order.human_attribute_name(:supplier_id)  %>: </strong> 
+    <%= order.supplier.corporate_name %>
   </div>

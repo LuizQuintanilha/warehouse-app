@@ -34,8 +34,10 @@ class OrdersController < ApplicationController
 
   def search
     @code = params["query"]
-
     @orders = Order.where("code LIKE ?", "%#{@code}%")
+  end
+
+  def edit
   end
 
   private

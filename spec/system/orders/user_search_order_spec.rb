@@ -33,14 +33,14 @@ describe 'Usuário busca por um pedido' do
     warehouse = Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000,
                                   address: 'Avenida do Aeroporto, 1000', cep: '15000-000',
                                   description: 'Galpão destinado a cargas internacionais' )
-    Warehouse.create!(name: 'Galpão RJ', code: 'SDRJ', city: 'Rio de Janeiro', area: 90_000,
+    galpao = Warehouse.create!(name: 'Galpão RJ', code: 'SDRJ', city: 'Rio de Janeiro', area: 90_000,
                                     address: 'Avenida Rio Branco, 2000', cep: '15500-000',
                                     description: 'Galpão do aeroporto Santos Drummmont' )
 
     supplier = Supplier.create!(corporate_name: 'ACHE LTDA', brand_name: 'ACME',registration_number: '2000230501',
                                 full_address: 'Avenida dos Coqueiros, 1000', zip: '23550-000', 
                                 city: 'Rio de Janeiro', state: 'RJ', email:'acheacme@email.com')
-    Supplier.create!(corporate_name: 'AMMC LTDA', brand_name: 'LOTUS',registration_number: '2000230513',
+    fornecedor = Supplier.create!(corporate_name: 'AMMC LTDA', brand_name: 'LOTUS',registration_number: '2000230513',
                       full_address: 'Avenida das Mangas, 1000', zip: '23500-000', 
                       city: 'Rio de Janeiro', state: 'RJ', email:'lotusammc@email.com')  
     order = Order.create!(user: user, warehouse: warehouse, supplier: supplier, estimated_delivery_date: 1.day.from_now) 
@@ -52,7 +52,7 @@ describe 'Usuário busca por um pedido' do
     # Assert
     expect(page).to have_content "Resultado da Busca por: #{order.code}"
     expect(page).to have_content '1 pedido encontrado'
-    expect(page).to have_content "Código #{order.code}"
+    expect(page).to have_content "Código: #{order.code}"
     expect(page).to have_content "Galpão Destino: GRU | Aeroporto SP"
     expect(page).to have_content "Fornecedor: ACHE LTDA"
   end
@@ -76,21 +76,21 @@ describe 'Usuário busca por um pedido' do
                           city: 'Rio de Janeiro', state: 'RJ', email:'lotusammc@email.com') 
     allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('GRU12345')          
     one_order = Order.create!(user: luiz, warehouse: second_warehouse, supplier: ammc_supplier, 
-                                    estimated_delivery_date: 1.day.from_now)
+                                    estimated_delivery_date: 3.day.from_now)
     allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('APRJ2345')   
     two_order = Order.create!(user: luiz, warehouse: first_warehouse, supplier: ache_supplier, 
-                          estimated_delivery_date: 1.day.from_now)
+                          estimated_delivery_date: 10.day.from_now)
     allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('APRJ2345') 
     three_order = Order.create!(user: luiz, warehouse: first_warehouse, supplier: ache_supplier, 
-                            estimated_delivery_date: 1.day.from_now)
+                            estimated_delivery_date: 5.day.from_now)
 
       
     # Act
     login_as(luiz)
     visit root_path
-    fill_in 'Buscar Pedido', with: 'APRJ'
+    fill_in 'Buscar Pedido', with: 'AP'
     click_on 'Buscar'
-    expect(page).to have_content ('2 Pedidos encontrados')
+    expect(page).to have_content ('2 pedidos encontrados')
     expect(page).to have_content ('APRJ2345') 
     expect(page).to have_content "Galpão Destino: GRU | Aeroporto SP"
     expect(page).not_to have_content ('GRU12345')

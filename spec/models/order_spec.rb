@@ -10,7 +10,7 @@ RSpec.describe Order, type: :model do
       supplier = Supplier.create!(corporate_name: 'ACHE LTDA', brand_name: 'ACME',registration_number: '2000230501',
                                     full_address: 'Avenida dos Coqueiros, 1000', zip: '23550-000', 
                                     city: 'Rio de Janeiro', state: 'RJ', email:'acheacme@email.com')
-      order = Order.new(user: user, warehouse: warehouse, supplier: supplier, estimated_delivery_date: '2023-05-23')
+      order = Order.new(user: user, warehouse: warehouse, supplier: supplier, estimated_delivery_date: 5.days.from_now)
 
       result = order.valid?
 
@@ -54,7 +54,7 @@ RSpec.describe Order, type: :model do
       supplier = Supplier.create!(corporate_name: 'ACHE LTDA', brand_name: 'ACME',registration_number: '2000230501',
                                     full_address: 'Avenida dos Coqueiros, 1000', zip: '23550-000', 
                                     city: 'Rio de Janeiro', state: 'RJ', email:'acheacme@email.com')
-      order = Order.new(user: user, warehouse: warehouse, supplier: supplier, estimated_delivery_date: '2023-05-23')
+      order = Order.new(user: user, warehouse: warehouse, supplier: supplier, estimated_delivery_date: 10.days.from_now)
       # Act
       order.save!
       result = order.code
@@ -70,8 +70,8 @@ RSpec.describe Order, type: :model do
       supplier = Supplier.create!(corporate_name: 'ACHE LTDA', brand_name: 'ACME',registration_number: '2000230501',
                                     full_address: 'Avenida dos Coqueiros, 1000', zip: '23550-000', 
                                     city: 'Rio de Janeiro', state: 'RJ', email:'acheacme@email.com')
-      first_order = Order.create!(user: user, warehouse: warehouse, supplier: supplier, estimated_delivery_date: '2023-05-23')
-      second_order = Order.new(user: user, warehouse: warehouse, supplier: supplier, estimated_delivery_date: '2023-05-30')
+      first_order = Order.create!(user: user, warehouse: warehouse, supplier: supplier, estimated_delivery_date: 10.days.from_now)
+      second_order = Order.new(user: user, warehouse: warehouse, supplier: supplier, estimated_delivery_date: 10.days.from_now)
 
       # Act
       second_order.save!

@@ -1,10 +1,8 @@
 <h1>Resultado da Busca por: <%= @code %></h1> 
 
-  <p><%= @orders.count  %> <%=  Order.model_name.human(count: @orders.count) %> <%= I18n.translate(:found, count: @orders.count)  %></p>
+  <p><%= @orders.count  %> <%=  Order.model_name.human(count: @orders.count).downcase %> <%= I18n.translate(:found, count: @orders.count)  %></p>
 
 <% @orders.each do |order| %>
-  <div>
-  <strong>1 pedido encontrado</strong>
-  </div>
+
   <%= render order %>
 <% end %>
