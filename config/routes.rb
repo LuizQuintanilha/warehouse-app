@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :product_models, only: [:index, :show, :new, :create]
   #end
 
-  resources :orders, only: [:new, :create, :show, :index, :edit, :update] do
+  resources :orders, only: [:new, :create, :show, :index, :edit, :update, :edit, :update] do
     get 'search', on: :collection
   end
 end
