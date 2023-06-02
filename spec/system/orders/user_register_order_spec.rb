@@ -38,9 +38,10 @@ describe 'usuário cadastra um pedido' do
     expect(page).to have_content 'Galpão Destino: GRU | Aeroporto SP'
     expect(page).to have_content 'Fornecedor: ACHE LTDA'
     expect(page).to have_content 'Usuário Responsável: Luiz - luiz@email.com'
+    expect(page).to have_content 'Data Prevista: 31/12/2024'  
+    expect(page).to have_content 'Situação do Pedido: Pendente'
     expect(page).not_to have_content 'Galpão RJ'
     expect(page).not_to have_content 'AMMC LTDA'
-    expect(page).to have_content 'Data Prevista: 31/12/2024'  
   end
   
 end

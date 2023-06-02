@@ -30,13 +30,13 @@ describe 'Usuário vê  seus próprios pedidos' do
                                     city: 'Rio de Janeiro', state: 'RJ', email:'lotusammc@email.com') 
     allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('GRU12345')          
     one_order = Order.create!(user: luiz, warehouse: first_warehouse, supplier: ammc_supplier, 
-                                    estimated_delivery_date: 1.day.from_now)
+                                    estimated_delivery_date: 1.day.from_now, status: 'pending')
     allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('APRJ2345')   
     two_order = Order.create!(user: luana, warehouse: first_warehouse, supplier: ache_supplier, 
-                          estimated_delivery_date: 5.day.from_now)
+                          estimated_delivery_date: 5.day.from_now, status: 'canceled')
     allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('SDU2345') 
     three_order = Order.create!(user: luiz, warehouse: first_warehouse, supplier: ache_supplier, 
-                            estimated_delivery_date: 12.day.from_now)
+                            estimated_delivery_date: 12.day.from_now, status: 'delivered')
 
     # Act
     login_as(luiz)
@@ -44,8 +44,11 @@ describe 'Usuário vê  seus próprios pedidos' do
     click_on 'Meus Pedidos'
 
     expect(page).to have_content one_order.code
+    expect(page).to have_content 'Pendente'
     expect(page).not_to have_content two_order.code 
+    expect(page).not_to have_content 'Cancelado'
     expect(page).to have_content three_order.code 
+    expect(page).to have_content 'Entregue'
 
   end
   it 'e visita um pedido' do

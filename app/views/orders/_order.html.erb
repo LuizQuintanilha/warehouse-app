@@ -8,7 +8,10 @@
     <%= order.warehouse.full_description %>
   </div>
   <div>
-
   <strong><%= Order.human_attribute_name(:supplier_id)  %>: </strong> 
     <%= order.supplier.corporate_name %>
+  </div>
+   <div>
+  <strong><%= Order.human_attribute_name(:status)  %>: </strong> 
+    <%= I18n.translate(order.status)%>
   </div>
