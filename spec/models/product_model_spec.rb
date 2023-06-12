@@ -17,14 +17,29 @@ RSpec.describe ProductModel, type: :model do
       # assert
       expect(result).to eq(false)
     end
+
     it 'sku is mandatory' do
       # arrange
-      supplier = Supplier.create!(brand_name: 'Acer', corporate_name: 'Acer Tech LTDA', registration_number: '20002305010',
-                                  full_address: 'Avenida Paulista, 10000', zip: '20220-000', city: 'São Paulo',
-                                  state: 'SP', email: 'acer.tech@email.com')
+      supplier = Supplier.create!(
+        brand_name: 'Acer',
+        corporate_name: 'Acer Tech LTDA',
+        registration_number: '20002305010',
+        full_address: 'Avenida Paulista, 10000',
+        zip: '20220-000',
+        city: 'São Paulo',
+        state: 'SP',
+        email: 'acer.tech@email.com'
+      )
 
-      pm = ProductModel.new(name: 'TV32', weight: 8000, width: 70, height: 45,
-                            depth: 10, sku: '', supplier: supplier)
+      pm = ProductModel.new(
+        name: 'TV32',
+        weight: 8000,
+        width: 70,
+        height: 45,
+        depth: 10,
+        sku: '',
+        supplier: supplier
+      )
 
       # act
       result = pm.valid?
@@ -32,5 +47,7 @@ RSpec.describe ProductModel, type: :model do
       # assert
       expect(result).to eq(false)
     end
+
+
   end
 end

@@ -1,37 +1,55 @@
-<h1>Galpão <%= @warehouse.code %></h1>
 <div>
-  <strong>Nome: </strong><%= @warehouse.name %>
+  <h1>Galpão <%= @warehouse.code %></h1>
+  <div>
+    <strong>Nome: </strong><%= @warehouse.name %>
+  </div>
+  <div>
+    <strong>Cidade: </strong><%= @warehouse.city %>
+  </div>
+  <div>
+    <strong>Área: </strong><%= @warehouse.area %> m²
+  </div>
+  <div>
+    <strong>Endereço: </strong><%= @warehouse.address %>
+  </div>
+  <div>
+    <strong>CEP:</strong> <%= @warehouse.cep %>
+  </div>
+  <div>
+    <strong>Descrição:</strong> <%= @warehouse.description %>
+  </div>
+  </div>
+    <%= link_to('Editar', edit_warehouse_path)  %>
+    <%= button_to('Excluir', warehouse_path(@warehouse.id), method: :delete)  %>
+  </div>
 </div>
-<div>
-  <strong>Cidade: </strong><%= @warehouse.city %>
-</div>
- <div>
-  <strong>Área: </strong><%= @warehouse.area %> m²
-</div>
-<div>
-  <strong>Endereço: </strong><%= @warehouse.address %>
-</div>
-<div>
-  <strong>CEP:</strong> <%= @warehouse.cep %>
-</div>
-<div>
-  <strong>Descrição:</strong> <%= @warehouse.description %>
-</div>
-</div>
-  <%= link_to('Editar', edit_warehouse_path)  %>
-  <%= button_to('Excluir', warehouse_path(@warehouse.id), method: :delete)  %>
-</div>
-<div>
+  <section id="stock_products">
   <h2>Itens do Estoque</h2>
   <% @stocks.each_pair do |pm, quantity| %>
-    <div>
+    <section>
     <%= quantity %> x <%= pm.name %>
-    </div>
-    <div>
     <strong>SKU:</strong> <%= pm.sku %>
+    <% end %>
+  </section>
+  <section id="stock_destination">
+    <%= form_with(url: warehouse_stock_product_destinations_path(@warehouse.id)) do |f| %>
+      <%= f.label(:product_model_id, 'Item para saída') %>
+      <%= f.collection_select(:product_model_id, @product_models, :id, :sku) %>
+      <div>
+        <%= f.label(:recipient, 'Destinatário') %>
+        <%= f.text_field(:recipient) %>
+        <%= f.label(:address, 'Endereço Destino') %>
+        <%= f.text_field(:address) %>
+        <%= f.submit 'Confirmar ' %>
+      </div>
+    <% end %>
     </div>
-  <% end %>
+  </section>
 </div>
+<div>
+  <h2>Saída de Estoque</h2>
+</div>
+
 <div>
   <%= link_to('Voltar', root_path)  %>
 </div>

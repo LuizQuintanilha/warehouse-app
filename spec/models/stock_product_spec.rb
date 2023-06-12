@@ -115,4 +115,115 @@ RSpec.describe StockProduct, type: :model do
       expect(stock_product.serial_number).to eq(original_serial)
     end
   end
+
+  describe '#available?' do
+    it 'true se não houver destino' do
+
+      user = User.create!(
+        name: 'Luiz',
+        email: 'luiz@email.com',
+        password: '123456'
+      )
+      warehouse = Warehouse.create!(
+        name: 'Aeroporto SP',
+        code: 'GRU',
+        city: 'Guarulhos',
+        area: 100_000,
+        address: 'Avenida do Aeroporto, 1000',
+        cep: '15000-000',
+        description: 'Galpão destinado a cargas internacionais'
+      )
+      supplier = Supplier.create!(
+        corporate_name: 'ACHE LTDA',
+        brand_name: 'ACME',
+        registration_number: '2000230501',
+        full_address: 'Avenida dos Coqueiros, 1000',
+        zip: '23550-000',
+        city: 'Rio de Janeiro',
+        state: 'RJ',
+        email: 'acheacme@email.com'
+      )
+      order = Order.create!(
+        user: user,
+        warehouse: warehouse,
+        supplier: supplier,
+        estimated_delivery_date: 10.days.from_now,
+        status: :delivered
+      )
+      product_a = ProductModel.create!(
+        name: 'Produto A',
+        weight: 1,
+        width: 10,
+        height: 20,
+        depth: 30,
+        supplier: supplier,
+        sku: 'PRODUTO-A'
+      )
+      stock_product = StockProduct.create!(
+        order: order,
+        product_model: product_a,
+        warehouse: warehouse
+      )
+
+      expect(stock_product.available?).to eq true
+
+    end
+
+    it 'false se tiver destino' do
+
+      user = User.create!(
+        name: 'Luiz',
+        email: 'luiz@email.com',
+        password: '123456'
+      )
+      warehouse = Warehouse.create!(
+        name: 'Aeroporto SP',
+        code: 'GRU',
+        city: 'Guarulhos',
+        area: 100_000,
+        address: 'Avenida do Aeroporto, 1000',
+        cep: '15000-000',
+        description: 'Galpão destinado a cargas internacionais'
+      )
+      supplier = Supplier.create!(
+        corporate_name: 'ACHE LTDA',
+        brand_name: 'ACME',
+        registration_number: '2000230501',
+        full_address: 'Avenida dos Coqueiros, 1000',
+        zip: '23550-000',
+        city: 'Rio de Janeiro',
+        state: 'RJ',
+        email: 'acheacme@email.com'
+      )
+      order = Order.create!(
+        user: user,
+        warehouse: warehouse,
+        supplier: supplier,
+        estimated_delivery_date: 10.days.from_now,
+        status: :delivered
+      )
+      product_a = ProductModel.create!(
+        name: 'Produto A',
+        weight: 1,
+        width: 10,
+        height: 20,
+        depth: 30,
+        supplier: supplier,
+        sku: 'PRODUTO-A'
+      )
+      stock_product = StockProduct.create!(
+        order: order,
+        product_model: product_a,
+        warehouse: warehouse
+      )
+      stock_product.create_stock_product_destination!(
+        recipient: 'Luiz Brito',
+        address: 'Rua do Fubá, 20, Rio de Janeiro, Rj - CEP: 23550-350'
+      )
+
+      expect(stock_product.available?).to eq false
+
+    end
+  end
+
 end
