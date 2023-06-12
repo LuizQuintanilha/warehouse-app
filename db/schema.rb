@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_02_125205) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_11_135416) do
+  create_table "order_items", force: :cascade do |t|
+    t.integer "product_model_id", null: false
+    t.integer "order_id", null: false
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["product_model_id"], name: "index_order_items_on_product_model_id"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.integer "warehouse_id", null: false
     t.integer "user_id", null: false
@@ -36,6 +46,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_125205) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["supplier_id"], name: "index_product_models_on_supplier_id"
+  end
+
+  create_table "stock_products", force: :cascade do |t|
+    t.integer "warehouse_id", null: false
+    t.integer "order_id", null: false
+    t.integer "product_model_id", null: false
+    t.string "serial_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_stock_products_on_order_id"
+    t.index ["product_model_id"], name: "index_stock_products_on_product_model_id"
+    t.index ["warehouse_id"], name: "index_stock_products_on_warehouse_id"
   end
 
   create_table "suppliers", force: :cascade do |t|
@@ -76,8 +98,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_125205) do
     t.string "description"
   end
 
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "product_models"
   add_foreign_key "orders", "suppliers"
   add_foreign_key "orders", "users"
   add_foreign_key "orders", "warehouses"
   add_foreign_key "product_models", "suppliers"
+  add_foreign_key "stock_products", "orders"
+  add_foreign_key "stock_products", "product_models"
+  add_foreign_key "stock_products", "warehouses"
 end

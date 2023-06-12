@@ -5,7 +5,7 @@ RSpec.describe User, type: :model do
     it 'exibe o nome e o email' do
       u = User.new(name: 'Luana Guarnier', email: 'luana@email.com')
 
-      result = u.description()
+      result = u.description
 
       expect(result).to eq 'Luana Guarnier - luana@email.com'
     end

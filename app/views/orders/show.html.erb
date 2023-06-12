@@ -15,6 +15,12 @@
 <div>
   <strong><%= Order.human_attribute_name(:status) %>:</strong> <%= I18n.translate(@order.status) %>
 </div>
+<h2>Itens do Pedido</h2>
+<%= link_to 'Adicionar Item',  new_order_order_item_path(order_id: @order.id) %>
+<% @order.order_items.each do |item| %>
+  <%= item.quantity %> x <%= item.product_model.name %>
+<% end %>
+
 
 <% if @order.pending? %>
   <%= button_to 'Entregue', delivered_order_path(@order.id) %>

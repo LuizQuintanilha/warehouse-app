@@ -1,14 +1,13 @@
 require 'rails_helper'
 
-describe 'Usuário cadastra um novo fornecedor' do 
-  it 'a partir do menu' do 
-
+describe 'Usuário cadastra um novo fornecedor' do
+  it 'a partir do menu' do
     visit root_path
     within('nav') do
       click_on 'Fornecedores'
     end
     click_on 'Cadastrar Fornecedor'
-    
+
     expect(page).to have_content('Cadastrar novo fornecedor')
     expect(page).to have_content('Razão Social')
     expect(page).to have_content('Marca')
@@ -19,11 +18,9 @@ describe 'Usuário cadastra um novo fornecedor' do
     expect(page).to have_content('Estado')
     expect(page).to have_content('Email')
     expect(page).to have_button('Salvar')
-
   end
 
   it 'com sucesso' do
-
     visit root_path
     click_on 'Fornecedores'
     click_on 'Cadastrar Fornecedor'
@@ -52,10 +49,10 @@ describe 'Usuário cadastra um novo fornecedor' do
     expect(page).to have_link('Voltar')
   end
 
-  it 'sem sucesso' do 
+  it 'sem sucesso' do
     visit root_path
     click_on 'Fornecedores'
-    click_on 'Cadastrar Fornecedor' 
+    click_on 'Cadastrar Fornecedor'
 
     fill_in 'Razão Social', with: ''
     fill_in 'Marca', with: ''

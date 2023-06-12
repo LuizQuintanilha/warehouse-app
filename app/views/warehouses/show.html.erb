@@ -21,5 +21,17 @@
   <%= link_to('Editar', edit_warehouse_path)  %>
   <%= button_to('Excluir', warehouse_path(@warehouse.id), method: :delete)  %>
 </div>
-
-<%= link_to('Voltar', root_path)  %>
+<div>
+  <h2>Itens do Estoque</h2>
+  <% @stocks.each_pair do |pm, quantity| %>
+    <div>
+    <%= quantity %> x <%= pm.name %>
+    </div>
+    <div>
+    <strong>SKU:</strong> <%= pm.sku %>
+    </div>
+  <% end %>
+</div>
+<div>
+  <%= link_to('Voltar', root_path)  %>
+</div>

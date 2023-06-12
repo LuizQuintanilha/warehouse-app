@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-describe 'Usuário edita um fornecedor' do 
-  it 'a partir do menu inicial' do 
-    supplier = Supplier.create!(corporate_name: 'ACHE LTDA', brand_name: 'ACME',registration_number: '2000230501',
-      full_address: 'Avenida dos Coqueiros, 1000', zip: '23550-000', 
-      city: 'Rio de Janeiro', state: 'RJ', email:'acheacme@email.com')
+describe 'Usuário edita um fornecedor' do
+  it 'a partir do menu inicial' do
+    supplier = Supplier.create!(corporate_name: 'ACHE LTDA', brand_name: 'ACME', registration_number: '2000230501',
+                                full_address: 'Avenida dos Coqueiros, 1000', zip: '23550-000',
+                                city: 'Rio de Janeiro', state: 'RJ', email: 'acheacme@email.com')
 
     visit root_path
     click_on 'Fornecedores'
@@ -20,14 +20,13 @@ describe 'Usuário edita um fornecedor' do
     expect(page).to have_field('Estado', with: 'RJ')
     expect(page).to have_field('Email', with: 'acheacme@email.com')
     expect(page).to have_button('Salvar')
- 
   end
 
-  it 'atualizado com  sucesso' do 
-    supplier = Supplier.create!(corporate_name: 'ACHE LTDA', brand_name: 'ACME',registration_number: '2000230501',
-      full_address: 'Avenida dos Coqueiros, 1000', zip: '23550-000', 
-      city: 'Rio de Janeiro', state: 'RJ', email:'acheacme@email.com')
-    
+  it 'atualizado com  sucesso' do
+    supplier = Supplier.create!(corporate_name: 'ACHE LTDA', brand_name: 'ACME', registration_number: '2000230501',
+                                full_address: 'Avenida dos Coqueiros, 1000', zip: '23550-000',
+                                city: 'Rio de Janeiro', state: 'RJ', email: 'acheacme@email.com')
+
     visit root_path
     click_on 'Fornecedores'
     click_on 'ACME'
@@ -42,11 +41,11 @@ describe 'Usuário edita um fornecedor' do
     expect(page).to have_content('Avenida Abacaxi, 25')
   end
 
-  it 'e mantém os campos obrigátorios' do 
-    supplier = Supplier.create!(corporate_name: 'ACHE LTDA', brand_name: 'ACME',registration_number: '2000230501',
-      full_address: 'Avenida dos Coqueiros, 1000', zip: '23550-000', 
-      city: 'Rio de Janeiro', state: 'RJ', email:'acheacme@email.com')
-    
+  it 'e mantém os campos obrigátorios' do
+    supplier = Supplier.create!(corporate_name: 'ACHE LTDA', brand_name: 'ACME', registration_number: '2000230501',
+                                full_address: 'Avenida dos Coqueiros, 1000', zip: '23550-000',
+                                city: 'Rio de Janeiro', state: 'RJ', email: 'acheacme@email.com')
+
     visit root_path
     click_on 'Fornecedores'
     click_on 'ACME'
@@ -58,6 +57,5 @@ describe 'Usuário edita um fornecedor' do
     click_on 'Salvar'
 
     expect(page).to have_content('Não foi possível atualizar dados do forcenedor.')
-
   end
 end

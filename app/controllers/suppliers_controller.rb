@@ -1,5 +1,5 @@
 class SuppliersController < ApplicationController
-  #before_action :set_supplier, only: [:show, :new, :create]
+  # before_action :set_supplier, only: [:show, :new, :create]
   def index
     @suppliers = Supplier.all
   end
@@ -8,7 +8,7 @@ class SuppliersController < ApplicationController
     @supplier = Supplier.find(params[:id])
   end
 
-  def new 
+  def new
     @supplier = Supplier.new
   end
 
@@ -45,7 +45,7 @@ class SuppliersController < ApplicationController
   end
 
   def supplier_params
-    params.require(:supplier).permit(:corporate_name, :brand_name, :registration_number, :full_address, :zip, :city, :state, :email)
+    params.require(:supplier).permit(:corporate_name, :brand_name, :registration_number, :full_address, :zip, :city,
+                                     :state, :email)
   end
-
 end

@@ -1,11 +1,17 @@
 require 'rails_helper'
 
-describe 'usuário vê detalhes do fornecedor' do 
-  it 'a partir da tela inicial' do 
-    supplier = Supplier.create!(corporate_name: 'ACHE LTDA', brand_name: 'ACME',registration_number: '2000230501',
-                              full_address: 'Avenida dos Coqueiros, 1000', zip: '23550-000', 
-                              city: 'Rio de Janeiro', state: 'RJ', email:'acheacme@email.com')
-    
+describe 'usuário vê detalhes do fornecedor' do
+  it 'a partir da tela inicial' do
+    Supplier.create!(
+      corporate_name: 'ACHE LTDA',
+      brand_name: 'ACME',
+      registration_number: '2000230501',
+      full_address: 'Avenida dos Coqueiros, 1000',
+      zip: '23550-000',
+      city: 'Rio de Janeiro',
+      state: 'RJ',
+      email: 'acheacme@email.com'
+    )
     visit root_path
     click_on 'Fornecedores'
     click_on 'ACME'
@@ -22,11 +28,18 @@ describe 'usuário vê detalhes do fornecedor' do
     expect(page).to have_link('Editar')
     expect(page).to have_link('Voltar')
   end
-  
-  it 'e voltar para a tela inicial' do 
-    supplier = Supplier.create!(corporate_name: 'ACHE LTDA', brand_name: 'ACME',registration_number: '2000230501',
-                                full_address: 'Avenida dos Coqueiros, 1000', zip: '23550-000', 
-                                city: 'Rio de Janeiro', state: 'RJ', email:'acheacme@email.com')
+
+  it 'e voltar para a tela inicial' do
+    Supplier.create!(
+      corporate_name: 'ACHE LTDA',
+      brand_name: 'ACME',
+      registration_number: '2000230501',
+      full_address: 'Avenida dos Coqueiros, 1000',
+      zip: '23550-000',
+      city: 'Rio de Janeiro',
+      state: 'RJ',
+      email: 'acheacme@email.com'
+    )
     visit root_path
     click_on 'Fornecedores'
     click_on 'ACME'
@@ -34,4 +47,4 @@ describe 'usuário vê detalhes do fornecedor' do
 
     expect(current_path).to eq(root_path)
   end
- end
+end

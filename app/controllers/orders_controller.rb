@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_order_and_check_user, only: [:show, :edit, :update, :delivered, :canceled]
+  before_action :set_order_and_check_user, only: %i[show edit update delivered canceled]
 
   def index
     @orders = current_user.orders
@@ -26,28 +26,34 @@ class OrdersController < ApplicationController
     end
   end
 
-  def show
-  end
+  def show; end
 
   def search
-    @code = params["query"]
-    @orders = Order.where("code LIKE ?", "%#{@code}%")
+    @code = params['query']
+    @orders = Order.where('code LIKE ?', "%#{@code}%")
   end
 
   def edit
-
     @warehouses = Warehouse.all
     @suppliers = Supplier.all
   end
 
   def update
-
     @order = Order.update(order_params)
     redirect_to @order, notice: 'Pedido atualizado com sucesso'
   end
 
   def delivered
     @order.delivered!
+    @order.order_items.each do |item|
+      item.quantity.times do
+        StockProduct.create!(
+          order: @order,
+          product_model: item.product_model,
+          warehouse: @order.warehouse
+        )
+      end
+    end
     redirect_to @order
   end
 
@@ -64,8 +70,8 @@ class OrdersController < ApplicationController
 
   def set_order_and_check_user
     @order = Order.find(params[:id])
-    if @order.user != current_user
-      return redirect_to root_path, notice: 'Você não tem acesso ao este pedido.'
-    end
+    return unless @order.user != current_user
+
+    redirect_to root_path, notice: 'Você não tem acesso ao este pedido.'
   end
 end

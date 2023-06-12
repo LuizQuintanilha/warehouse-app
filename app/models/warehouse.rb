@@ -1,7 +1,7 @@
 class Warehouse < ApplicationRecord
-  validates :name, :code, :city,  :area, :description, :address, :cep, presence: true
-  #validates atributos, tipo_da_validação: true
+  validates :name, :code, :city, :area, :description, :address, :cep, presence: true
   validates :code, uniqueness: true
+  has_many :stock_products
 
   def full_description
     "#{code} | #{name}"
