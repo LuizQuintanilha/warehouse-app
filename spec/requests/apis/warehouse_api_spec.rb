@@ -75,4 +75,65 @@ describe 'warehouse API' do
       expect(json_response).to eq []
     end
   end
+
+  context 'POST /api/v1/warehouse' do
+    it 'com sucesso' do
+      warehouse_params = { warehouse: {
+        name: 'Maceio',
+        code: 'MCZ',
+        city: 'Maceio',
+        area: 50_000,
+        address: 'Av. Alagoas, 1000',
+        cep: '22350-000',
+        description: 'Galpão do do Estado de Maceio'
+      }}
+      post '/api/v1/warehouses', params: warehouse_params
+
+      expect(response).to have_http_status(201)
+      expect(response.content_type).to include 'application/json'
+      json_response = JSON.parse(response.body)
+      expect(json_response["name"]).to eq 'Maceio'
+      expect(json_response["code"]).to eq 'MCZ'
+      expect(json_response["address"]).to eq 'Av. Alagoas, 1000'
+      expect(json_response["city"]).to eq 'Maceio'
+      expect(json_response["cep"]).to eq '22350-000'
+      expect(json_response["description"]).to eq 'Galpão do do Estado de Maceio'
+      expect(json_response["area"]).to eq(50_000)
+    end
+
+    it 'sem sucesso se parametros estão incompletos' do
+      warehouse_params = { warehouse: {
+        name: 'Galpão ES',
+        code: 'MCZ',
+        city: '',
+        area: '',
+        address: '',
+        cep: '',
+        description: ''
+      }}
+
+      post '/api/v1/warehouses', params: warehouse_params
+
+      expect(response.status).to eq 412
+      expect(response.body).to include 'Endereço não pode ficar em branco'
+      expect(response.body).to include 'Cidade não pode ficar em branco'
+    end
+
+    it 'falha se houver erros internos' do
+      allow(Warehouse).to receive(:new).and_raise(ActiveRecord::ActiveRecordError)
+      warehouse_params = { warehouse: {
+        name: 'Maceio',
+        code: 'MCZ',
+        city: 'Maceio',
+        area: 50_000,
+        address: 'Av. Alagoas, 1000',
+        cep: '22350-000',
+        description: 'Galpão do do Estado de Maceio'
+      }}
+
+      post '/api/v1/warehouses', params: warehouse_params
+
+      expect(response.status).to eq 500
+    end
+  end
 end
